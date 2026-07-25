@@ -4,16 +4,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ChromOptionsTest {
     @Test
-    public  void JavaScript_Table_Test() throws InterruptedException {
+    public  void chromeOptionsTest() throws InterruptedException {
         SafariOptions options = new SafariOptions();
         options.setAcceptInsecureCerts(true); // ByPass SSLCertification
 
@@ -22,11 +20,16 @@ public class ChromOptionsTest {
         proxy.setHttpProxy("ipaddress:4444");
         options.setCapability("proxy", proxy);*/
 
-        /* Set Download Preferences
+         //Set Download Preferences
         ChromeOptions chromeOptions = new ChromeOptions();
         Map<String, Object> DownloadPrefs = new HashMap<>();
         DownloadPrefs.put("download.default_directory", "/directory/path");
-        chromeOptions.setExperimentalOption("prefs", DownloadPrefs);*/
+        chromeOptions.setExperimentalOption("prefs", DownloadPrefs);
+
+       /* Run Tests In HeadLess mode
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);*/
 
         WebDriver driver = new SafariDriver(options);
         driver.get("https://expired.badssl.com");

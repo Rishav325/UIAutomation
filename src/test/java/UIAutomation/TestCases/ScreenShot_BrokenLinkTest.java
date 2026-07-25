@@ -2,8 +2,10 @@ package UIAutomation.TestCases;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +19,7 @@ public class ScreenShot_BrokenLinkTest {
 
     @Test
     public void ScreenShotTest() throws IOException, InterruptedException {
-        WebDriver driver = new SafariDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://www.amazon.in/ref=nav_logo");
         driver.manage().window().maximize();
 
@@ -29,7 +31,7 @@ public class ScreenShot_BrokenLinkTest {
 
     @Test
     public void checkBrokenLinksTest() throws IOException, InterruptedException {
-        WebDriver driver = new SafariDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 
         List<WebElement> links=   driver.findElements(By.cssSelector("li[class='gf-li'] a"));
@@ -42,7 +44,7 @@ public class ScreenShot_BrokenLinkTest {
             conn.connect();
             int respCode = conn.getResponseCode();
             System.out.println(respCode);
-            a.assertTrue(respCode<400, "The link with Text"+link.getText()+" is broken with code" +respCode);
+            a.assertTrue(respCode>400, "The link with Text"+link.getText()+" is broken with code" +respCode);
         }
         a.assertAll();
         driver.close();

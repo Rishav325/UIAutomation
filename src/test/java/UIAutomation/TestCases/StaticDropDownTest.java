@@ -3,20 +3,25 @@ package UIAutomation.TestCases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StaticDropDownTest {
 
     @Test
     public void DropDownTest() throws IOException, InterruptedException {
-        WebDriver driver = new SafariDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         driver.manage().window().maximize();
         Select dropdownElement = new Select(driver.findElement(By.id("dropdown-class-example")));
@@ -25,6 +30,24 @@ public class StaticDropDownTest {
         dropdownElement.selectByVisibleText("Option3");
         System.out.println(dropdownElement.getFirstSelectedOption().getAttribute("value"));
         Thread.sleep(500);
+        driver.close();
+    }
+
+    @Test
+    public void ValidateDropDownValuesTest() throws IOException, InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        driver.manage().window().maximize();
+        List<String> expectedOptions = Arrays.asList("Select","Option1","Option2","Option3");
+        Select dropdownElement = new Select(driver.findElement(By.id("dropdown-class-example")));
+        List<WebElement> dropDownOptions = dropdownElement.getOptions();
+        List<String> actualOptions = new ArrayList<>();
+        for(WebElement element:dropDownOptions)
+        {
+            actualOptions.add(element.getText());
+        }
+        System.out.println(actualOptions.toString());
+        Assert.assertEquals(expectedOptions,actualOptions);
         driver.close();
     }
 

@@ -23,7 +23,6 @@ public class ActionsClass_Windows_FramesTest {
         driver.manage().window().maximize();
 
         Actions actions = new Actions(driver);
-
         actions.moveToElement(driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']")))
                 .click().keyDown(Keys.SHIFT).sendKeys("Hello").doubleClick().build().perform();
 

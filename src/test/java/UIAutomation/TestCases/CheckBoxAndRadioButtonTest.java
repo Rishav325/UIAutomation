@@ -1,8 +1,10 @@
 package UIAutomation.TestCases;
 
+import UIAutomation.TestComponents.Retry;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +14,7 @@ import java.util.List;
 public class CheckBoxAndRadioButtonTest {
     @Test
     public  void CheckBoxTest() throws InterruptedException {
-        WebDriver driver = new SafariDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         driver.manage().window().maximize();
 
@@ -26,9 +28,9 @@ public class CheckBoxAndRadioButtonTest {
         driver.close();
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public  void RadioButtonTest() throws InterruptedException {
-        WebDriver driver = new SafariDriver();
+        WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         driver.manage().window().maximize();
 
